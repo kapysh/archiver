@@ -1,0 +1,170 @@
+; ** Disc Publisher 2 **
+; .INF for Win 2000/XP/Vista (32-bit and 64-bit)
+;
+; Combination printer INF for NT 4.0 and Win95.
+; 
+; (This inf should work for both OS's, but not all sections apply to both.)
+;
+;
+
+[Version]
+Signature="$Windows NT$"
+Class=Printer
+ClassGUID={4D36E979-E325-11CE-BFC1-08002BE10318}
+Provider=%Organization%
+DriverVer = 08/12/2009,1.30
+CatalogFile=bravo2.cat
+
+;
+; Manufacturer Sections
+;
+; This section lists all of the manufacturers that we will
+; display in the Dialog box.
+;
+[Manufacturer]
+%PRIMERA_TECH% = Primera, NTamd64
+
+
+;
+; Model Sections 
+;
+; These sections correspond with an entry listed in the
+; [Manufacturer] section above. The models will be displayed in the order
+; that they appear here.
+;
+; Used to install
+;;    - an x86 driver on a machine running Windows 2000/XP/Vista  32-Bit
+;
+[Primera]
+%PRINTER_NAME%    = OEMPRINT,USBPRINT\PRIMERA_TECHNOLOGY_IA5E7
+
+
+;; Used to install
+;;    - an x64 driver on a machine of any architecture type, running Windows XP/Vista  64-Bit
+[Primera.NTamd64]
+%PRINTER_NAME%    = OEMPRINT,USBPRINT\PRIMERA_TECHNOLOGY_IA5E7
+
+;
+; Installer Sections
+;
+; These sections control file installation, and reference all files that
+; need to be copied. The section name will be assumed to be the driver data
+; file, unless there is an explicit DataFile section listed.
+;
+; Also note the ".NT" or ".WIN" notation. This is done to allow for a single INF to 
+; work on Win9x and WinNT. When this format is used, the DataFile must be declared explicitly. 
+; Win95 does not support this notation, so the old format is used.
+; See the latest WinNT DDK for more info.   
+;
+[OEMPRINT]
+CopyFiles   = OEMCOPY, INI_FILES
+DataSection = OEMDATA
+
+
+; Copy Sections
+;
+; Lists of files that are actually copied. These sections are referenced
+; from the installer sections above. Only create a section if it contains
+; two or more files (if we only copy a single file, identify it in the
+; installer section, using the @filename notation) or if it's a color
+; profile (since the DestinationDirs can only handle sections, and not
+; individual files).
+;
+[OEMCOPY]
+Bravo2_d.dll
+Bravo2_u.dll
+Bravo2_d.dat
+Bravo2.hlp
+PrimaClr.cpr
+Bravo2.cc
+langmoni.dll
+Bravo2_L.fzp
+Brv2_PgF.prn
+Brv2_PgL.prn
+Brv2_CnF.prn
+Brv2_CnL.prn
+Brv2_AlF.prn
+Brv2_AlL.prn
+bonstbl1.dll
+DiscPub2.ini
+
+[INI_FILES]
+DiscPub2.ini
+
+
+[OEMCOPY_WIN]
+
+;
+; Data Sections
+;
+; These sections contain data that is shared between devices.
+;
+[OEMDATA]
+DriverFile = Bravo2_d.dll
+ConfigFile = Bravo2_u.dll
+DataFile   = Bravo2_d.dat
+HelpFile   = Bravo2.hlp
+LanguageMonitor=%LANGMON%
+
+
+;
+; Call SetupSetDirectoryId with 66000 to set the target directory at runtime
+; (depending on which environment drivers are getting installed)
+;
+[DestinationDirs]
+DefaultDestDir=66000
+INI_FILES= 16419, PTI\Drivers\%PRINTER_NAME%
+
+
+[SourceDisksNames.x86]
+1= %Location%,,,
+
+[SourceDisksFiles.x86]
+Bravo2_d.dll= 1,\i386
+Bravo2_u.dll= 1,\i386
+langmoni.dll= 1,\i386
+Bravo2_d.dat = 1
+Bravo2.hlp = 1
+PrimaClr.cpr = 1
+Bravo2.cc  = 1
+Bravo2_L.fzp  = 1
+Brv2_PgF.prn = 1
+Brv2_PgL.prn = 1
+Brv2_CnF.prn = 1
+Brv2_CnL.prn = 1
+Brv2_AlF.prn = 1
+Brv2_AlL.prn = 1
+bonstbl1.dll = 1
+DiscPub2.ini = 1
+
+[SourceDisksNames.amd64]
+1= %Location%,,,
+
+[SourceDisksFiles.amd64]
+Bravo2_d.dll= 1,\amd64
+Bravo2_u.dll= 1,\amd64
+langmoni.dll= 1,\amd64
+Bravo2_d.dat = 1
+Bravo2.hlp = 1
+PrimaClr.cpr = 1
+Bravo2.cc  = 1
+Bravo2_L.fzp  = 1
+Brv2_PgF.prn = 1
+Brv2_PgL.prn = 1
+Brv2_CnF.prn = 1
+Brv2_CnL.prn = 1
+Brv2_AlF.prn = 1
+Brv2_AlL.prn = 1
+bonstbl1.dll = 1
+DiscPub2.ini = 1
+
+
+;
+; Localizable Strings
+;
+[Strings]
+Organization = "Primera Technology, Inc."
+Location       = "Primera Installer Disc"
+PRIMERA_TECH = "Primera Technology"
+LANGMON="Primera Language Monitor 2,LANGMONI.DLL"
+PRINTER_NAME = "Disc Publisher II"

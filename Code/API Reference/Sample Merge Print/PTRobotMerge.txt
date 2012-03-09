@@ -1,0 +1,1 @@
+"Text on top","Bottom Text","Left Text","Right Text","background.jpg",

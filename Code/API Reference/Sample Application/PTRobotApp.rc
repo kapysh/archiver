@@ -1,0 +1,332 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\PTRobotApp.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\PTRobotApp.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About PTRobotApp"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "PTRobotApp Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2005",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
+END
+
+IDD_PTROBOTAPP_DIALOG DIALOGEX 0, 0, 358, 342
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "PTRobotApp"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_ROBOT_COMBO,88,17,147,51,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Robot:",IDC_ROBOT_STATIC,58,18,27,12
+    PUSHBUTTON      "Enumerate Robots",IDC_ENUM_ROBOTS_BTN,235,16,73,15
+    COMBOBOX        IDC_FROM_COMBO,52,163,163,54,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "From:",IDC_FROM_STATIC,23,166,23,10
+    LTEXT           "To:",IDC_TO_STATIC,23,186,23,11
+    COMBOBOX        IDC_TO_COMBO,51,183,163,53,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Move Discs...",IDC_MOVEDISCS_GRP,7,148,344,62
+    CONTROL         "Through Recorders",IDC_THROUGH_REC_CHK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,225,156,115,11
+    EDITTEXT        IDC_PRINT_FILE_EDIT,47,233,131,13,ES_AUTOHSCROLL
+    LTEXT           "Print File:",IDC_PRINTFILE_STATIC,11,235,33,11
+    PUSHBUTTON      "Browse...",IDC_PRINT_BROWSE_BTN,179,233,35,13
+    PUSHBUTTON      "GO >>",IDC_GO_BTN,176,315,41,20
+    GROUPBOX        "Robot Info...",IDC_STATIC,7,36,344,63
+    LTEXT           "Drives:",IDC_STATIC,15,59,61,11
+    LTEXT           "Printer:",IDC_STATIC,15,72,48,11
+    LTEXT           "Bins:",IDC_STATIC,15,84,55,11
+    LTEXT           "Robot Type:",IDC_STATIC,15,48,58,11
+    LTEXT           "Static",IDC_ROBOTTYPE_STATIC,60,48,93,10
+    LTEXT           "Static",IDC_NUMBINS_STATIC,60,84,60,10
+    LTEXT           "Static",IDC_NUMDRIVES_STATIC,60,59,60,10
+    LTEXT           "Static",IDC_PRINTER_STATIC,60,72,95,10
+    LISTBOX         IDC_DRIVE_LIST,156,51,144,44,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "DriveInfo",IDC_DRIVEINFO_BTN,302,51,46,14
+    LTEXT           "Drives...",IDC_STATIC,159,42,112,8
+    EDITTEXT        IDC_COPIES_EDIT,125,321,35,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Copies:",IDC_STATIC,93,325,27,10
+    PUSHBUTTON      "Kill Error",IDC_KILLERROR_BTN,7,315,61,20
+    GROUPBOX        "Robot Status...",IDC_STATIC,7,104,344,38
+    LTEXT           "Idle",IDC_ROBOTSTATUS,53,118,272,12
+    CONTROL         "Kiosk Mode",IDC_KIOSKMODE_CHK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,225,181,115,11
+    CONTROL         "Through Printer",IDC_THROGH_PTR_CHK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,225,194,115,11
+    PUSHBUTTON      "Get Printer Settings",IDC_GET_PTRSETTINGS,88,253,73,14
+    PUSHBUTTON      "Set Printer Settings",IDC_SET_PTRSETTINGS,8,253,73,14
+    CONTROL         "CALLBACK open/close (manual)",IDC_MANUAL_OPEN_CLOSE_CHK,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,237,168,112,10
+    LTEXT           "PROGRESS:",IDC_JOBPROGRESS,53,130,253,8
+    PUSHBUTTON      "Open/Close",IDC_OPEN_CLOSE,302,65,45,14
+    PUSHBUTTON      "Set Merge Data...",IDC_SET_MERGE,166,252,73,14
+    CONTROL         "Print First",IDC_PRINT_FIRST_CHK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,229,234,70,10
+    PUSHBUTTON      "Enum Drives",IDC_ENUM_DRIVES,302,80,45,14
+    COMBOBOX        IDC_LANG_COMBO,233,284,118,70,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Printing...",IDC_STATIC,7,217,344,55
+    LTEXT           "Language:",IDC_STATIC,189,287,40,11
+    PUSHBUTTON      "System Action",IDC_SYSTEM_ACTION,109,283,52,16
+    COMBOBOX        IDC_SYSTEMACTION_COMBO,7,284,101,77,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Unicode",IDC_UNICODE,7,7,38,8
+END
+
+IDD_CHOOSE_ROBODRIVE DIALOGEX 0, 0, 315, 198
+STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOPMOST | WS_EX_APPWINDOW
+CAPTION "Select Robotic Drives..."
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,175,177,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,232,177,50,14
+    LTEXT           "Static",IDC_DRIVE_DESC1,7,74,147,12,NOT WS_VISIBLE
+    LTEXT           "Static",IDC_DRIVE_DESC2,7,90,147,12,NOT WS_VISIBLE
+    LTEXT           "Static",IDC_DRIVE_DESC3,7,107,147,12,NOT WS_VISIBLE
+    LTEXT           "Static",IDC_DRIVE_DESC4,7,124,147,12,NOT WS_VISIBLE
+    LTEXT           "Static",IDC_DRIVE_DESC5,7,141,147,12,NOT WS_VISIBLE
+    PUSHBUTTON      "Open/Close",IDC_OPENCLOSE1,248,72,53,11,NOT WS_VISIBLE | WS_GROUP
+    PUSHBUTTON      "Open/Close",IDC_OPENCLOSE2,248,88,53,11,NOT WS_VISIBLE
+    PUSHBUTTON      "Open/Close",IDC_OPENCLOSE3,248,105,53,11,NOT WS_VISIBLE
+    PUSHBUTTON      "Open/Close",IDC_OPENCLOSE4,248,122,53,11,NOT WS_VISIBLE
+    PUSHBUTTON      "Open/Close",IDC_OPENCLOSE5,248,140,53,11,NOT WS_VISIBLE
+    COMBOBOX        IDC_DRIVE_COMBO1,161,72,86,53,CBS_DROPDOWN | CBS_SORT | NOT WS_VISIBLE | WS_GROUP | WS_TABSTOP
+    COMBOBOX        IDC_DRIVE_COMBO2,161,88,86,50,CBS_DROPDOWN | CBS_SORT | NOT WS_VISIBLE | WS_TABSTOP
+    COMBOBOX        IDC_DRIVE_COMBO3,161,105,86,54,CBS_DROPDOWN | CBS_SORT | NOT WS_VISIBLE | WS_TABSTOP
+    COMBOBOX        IDC_DRIVE_COMBO4,161,122,86,49,CBS_DROPDOWN | CBS_SORT | NOT WS_VISIBLE | WS_TABSTOP
+    COMBOBOX        IDC_DRIVE_COMBO5,161,139,86,46,CBS_DROPDOWN | CBS_SORT | NOT WS_VISIBLE | WS_TABSTOP
+    LTEXT           "Drive",IDC_STATIC,26,57,34,12
+    LTEXT           "Location",IDC_STATIC,202,57,34,12
+    LTEXT           "Please select the robotically controlled drives for this robot...",IDC_STATIC,7,14,203,14
+    PUSHBUTTON      "Identify Robot",IDC_IDROBOT,95,31,108,17
+END
+
+IDD_SETPRINER_SETTINGS DIALOGEX 0, 0, 263, 89
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,65,68,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,141,68,50,14
+    LTEXT           "Print Quality",IDC_STATIC,63,16,59,12
+    LTEXT           "Outer Diameter",IDC_STATIC,63,32,60,12
+    LTEXT           "Inner Margin",IDC_STATIC,63,47,56,12
+    EDITTEXT        IDC_PRINT_QUALITY_EDIT,127,16,29,13,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_INNERDIAM_EDIT,127,47,27,13,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_OUTERMARGIN_EDIT,127,32,28,13,ES_AUTOHSCROLL | ES_NUMBER
+END
+
+IDD_MERGE_DATA DIALOGEX 0, 0, 356, 239
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Merge Text/Photos"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_MERGE_EDIT1,57,84,269,12,ES_MULTILINE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_MERGE_EDIT2,57,98,269,12,ES_MULTILINE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_MERGE_EDIT3,57,112,269,12,ES_MULTILINE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_MERGE_EDIT4,57,126,269,12,ES_MULTILINE | ES_AUTOHSCROLL
+    EDITTEXT        IDC_MERGE_EDIT5,57,153,224,12,ES_MULTILINE | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,298,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,298,24,50,14
+    LTEXT           "This sample application is designed for PTRobotPrint.std which was created with 4 merge text fields and 1 background bitmap.",IDC_STATIC,22,52,291,25
+    LTEXT           "Enter replaceable text and/or photo names below.\nFilenames must include the full path.  The selected Surething file must have an equal number of Merge fields.",IDC_STATIC,22,15,243,30
+    LTEXT           "Text Field 1:",IDC_STATIC,12,86,44,8
+    LTEXT           "Text Field 2:",IDC_STATIC,12,100,42,8
+    LTEXT           "Text Field 3:",IDC_STATIC,12,114,40,8
+    LTEXT           "Text Field 4:",IDC_STATIC,12,128,42,8
+    LTEXT           "Background Bitmap:",IDC_STATIC,11,151,40,18,0,WS_EX_RIGHT
+    PUSHBUTTON      "Browse...",IDC_PRINT_BROWSE_BTN,281,153,35,13
+    CONTROL         "PTRobot_PrintFileWithMerge()",IDC_RADIO_MERGE1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,33,202,113,10
+    CONTROL         "PTRobot_PrintFileWithMerge2()",IDC_RADIO_MERGE2,"Button",BS_AUTORADIOBUTTON,33,217,117,10
+    GROUPBOX        "Using...",IDC_STATIC,19,191,306,40
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,2,3,0
+ PRODUCTVERSION 1,2,3,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "Primera Technology, Inc."
+            VALUE "FileDescription", "PTRobot Sample App"
+            VALUE "FileVersion", "1.2.3.0"
+            VALUE "InternalName", "PTRobotApp.exe"
+            VALUE "LegalCopyright", "(c) Primera Technology, Inc.  All rights reserved."
+            VALUE "OriginalFilename", "PTRobotApp.exe"
+            VALUE "ProductName", "PTRobot"
+            VALUE "ProductVersion", "1.2.3.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_PTROBOTAPP_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 351
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 335
+    END
+
+    IDD_CHOOSE_ROBODRIVE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 308
+        TOPMARGIN, 14
+        BOTTOMMARGIN, 191
+    END
+
+    IDD_SETPRINER_SETTINGS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 256
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 82
+    END
+
+    IDD_MERGE_DATA, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 348
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 231
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_ABOUTBOX            "&About PTRobotApp..."
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "res\PTRobotApp.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
