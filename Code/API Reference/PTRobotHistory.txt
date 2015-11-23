@@ -1,0 +1,578 @@
+Known issues and History of changes to PTRobot
+
+
+Known issues:
+-------------
+* Older units with Pioneer drives and older bridge boards ("In-System" chip) have a problem opening the drive.
+  The Pioneer drive will fail to open after being closed with media inserted using the PTRobot Open/Close call.  
+  Customer should use callback OpenClose and use their own burn engine open/close functionality if needed.
+
+
+History:
+
+10/28/2011 - Version 1.6.2.0
+----------------------------
+Versions:  PTRobot.dll 1.6.2.0,  PTRobotDP.dll 1.6.2.0, PTRobotDPPRO.dll 1.6.2.0, PTRobotDPse.dll 1.6.2.0, PTRobot4100.dll 1.6.2.0 PTRobotApp.exe 1.2.3.0, PTRobotStr 1.1.4.0  MPTRobot.dll 1.0.9.0
+- Fixed bug introduced on version 1.6.0 where printing could get sent twice on very slow computers in highest print quality
+  (before it could may even cause printer to reset toward the end of first print).
+
+
+9/30/2011 - Version 1.6.1.0
+---------------------------
+Versions:  PTRobot.dll 1.6.1.0,  PTRobotDP.dll 1.6.1.0, PTRobotDPPRO.dll 1.6.1.0, PTRobotDPse.dll 1.6.1.0, PTRobot4100.dll 1.6.1.0 PTRobotApp.exe 1.2.3.0, PTRobotStr 1.1.4.0  MPTRobot.dll 1.0.9.0
+- Fixed bug introduced in version 1.6.0 where drives might not enumerate properly (if using PTRobot with 2-drive unit and drives not stored in flash).
+- Updated ink low warning for 4100 Series to work with multi-page printing mode too.  To work, this must be used in conjuction with printer driver 1.0.6 or higher.
+
+
+9/19/2011 - Version 1.6.0.0 
+--------------------------------
+Versions:  PTRobot.dll 1.6.0.0,  PTRobotDP.dll 1.6.0.0, PTRobotDPPRO.dll 1.6.0.0, PTRobotDPse.dll 1.6.0.0, PTRobot4100.dll 1.6.0.0 PTRobotApp.exe 1.2.3.0, PTRobotStr 1.1.4.0  MPTRobot.dll 1.0.9.0
+- If the print fails to complete (e.g. job fails to get into the printer queue for some reason) we will try to send the print 3 times before failing
+- Added support for Bravo 4051 (part of 4100 Series)
+- Added an ink low warning for Bravo 4100/XRP 4100/ 4051. The default is to warn at 10% ink remaining.  The value can be modified by changing
+  the InkLowWarnPercent value in the [settings] section of the PrinterName.INI file (located at C:\ProgramData\PTI\Drivers\Disc Publisher 4100 Series)
+- Updated to utilize the Drive Serial # (not just bridge serial #). Needed for newer Bravo4100 units that have on-board bridge chip.
+- Fogbugz 1366: Bravo4100 was failing to log flash page 2 info (unit serial number and date).
+- Fogbugz 1308: Fixed crash that would occur in PTRobot_EnumDrives when trying to get the bus name of a virtual drive.
+
+5/2/2011 - Version 1.5.9.0
+--------------------------------
+Versions:  PTRobot.dll 1.5.9.0,  PTRobotDP.dll 1.5.9.0, PTRobotDPPRO.dll 1.5.9.0, PTRobotDPse.dll 1.5.9.0, PTRobot4100.dll 1.5.9.0 PTRobotApp.exe 1.2.2.0, PTRobotStr 1.1.4.0  MPTRobot.dll 1.0.8.0
+- Fixed print exception seen intermittently on some computers - 1.5.8 did not really fix.
+
+4/25/2011 - Version 1.5.8.0
+--------------------------------
+Versions:  PTRobot.dll 1.5.8.0,  PTRobotDP.dll 1.5.8.0, PTRobotDPPRO.dll 1.5.8.0, PTRobotDPse.dll 1.5.8.0, PTRobot4100.dll 1.5.8.0 PTRobotApp.exe 1.2.2.0, PTRobotStr 1.1.4.0  MPTRobot.dll 1.0.8.0
+- Fixed print exception on some computers
+- PTRobot4100: Checking FW version and not setting to XRP version unless new enough firmware.
+
+4/5/2011 - Version 1.5.7.0
+--------------------------------
+Versions:  PTRobot.dll 1.5.7.0,  PTRobotDP.dll 1.5.7.0, PTRobotDPPRO.dll 1.5.7.0, PTRobotDPse.dll 1.5.7.0, PTRobot4100.dll 1.5.7.0 PTRobotApp.exe 1.2.2.0, PTRobotStr 1.1.3.0  MPTRobot.dll 1.0.8.0
+- MPTRobot.dll: added missing MaxDiscsPerBin in RobotInfo2, added some missing Enum values.
+- Added some debug to know if 4100 XRP vs. 4100.
+- Allowing PTRobot to work with the OEM 4100 print engine
+- Added 4100 XRP as new robot type
+- Added some error strings for DP 4100 (updated PTRobotStr.dll also).
+- Updated PTRobot_GetSureThingPreview() with the ability to only return whether SureThing 5 is installed or not (do this by specifying Resolution=0. No preview will be created in this case).
+- Fixed bug where align print would not work on Bravo Pro / Xi
+- Fixed bug where multiple discs picked from bottom recorder to printer would report incorrectly (this likely false error but fixed anyway).
+- Fixed bug where Bravo SE & Pro ink remaining % was incorrect as returned by PTRobot_GetRobotStatus2
+
+
+1/4/2011 - Version 1.5.6.0
+--------------------------------
+Versions:  PTRobot.dll 1.5.6.0,  PTRobotDP.dll 1.5.6.0, PTRobotDPPRO.dll 1.5.6.0, PTRobotDPse.dll 1.5.6.0, PTRobot4100.dll 1.5.6.0 PTRobotApp.exe 1.2.1.0, PTRobotStr 1.1.2.0  MPTRobot.dll 1.0.7.0
+- PTRobot4100: Bug from 1.5.4 was not completely fixed where it would think the job had completed before it even started (very slow computers).  
+  Fixed it by first watching for it to start printing and THEN watching for it to finish.
+- PTRobot4100: Also fixes condition where the unit finished with an error on a previous print-only job so the "Error" key was not zero in the .INI file
+  Now it resets the Error key to zero at the beginning of the next print-only job
+
+
+12/21/2010 - Version 1.5.5.(0/1)
+--------------------------------
+Versions:  PTRobot.dll 1.5.5.0,  PTRobotDP.dll 1.5.5.0, PTRobotDPPRO.dll 1.5.5.0, PTRobotDPse.dll 1.5.5.0, PTRobot4100.dll 1.5.5.1 PTRobotApp.exe 1.2.1.0, PTRobotStr 1.1.2.0  MPTRobot.dll 1.0.7.0
+- Updated strings for Bravo4100 to not say "press left button".
+- PTRobot4100: fixed to display correct dropped disc message during multi-page print mode (needs updated language monitor 1.0.5).
+
+
+12/2/2010 - Version 1.5.4.(0/1)
+------------------------------
+Versions:  PTRobot.dll 1.5.4.0,  PTRobotDP.dll 1.5.4.0, PTRobotDPPRO.dll 1.5.4.0, PTRobotDPse.dll 1.5.4.0, PTRobot4100.dll 1.5.4.1 PTRobotApp.exe 1.2.1.0, PTRobotStr 1.1.2.0  MPTRobot.dll 1.0.7.0
+- PTRobot4100:  fixed bug where an error would not be cleared from the PTRobot_GetStatus() call if the unit had gone into an error during a 
+  print-only job.  In PTPublisher, this would cause the job to remain in the "Queued" state.
+
+
+12/1/2010 - Version 1.5.4
+--------------------------
+Versions:  PTRobot.dll 1.5.4.0,  PTRobotDP.dll 1.5.4.0, PTRobotDPPRO.dll 1.5.4.0, PTRobotDPse.dll 1.5.4.0, PTRobot4100.dll 1.5.4.0 PTRobotApp.exe 1.2.1.0, PTRobotStr 1.1.2.0  MPTRobot.dll 1.0.7.0
+- PTRobot4100:  improved error handling during print-only operation (e.g. dropped disc into printer, multiple discs picked)
+- PTRobot4100: fixed bug where it would sometimes think printing had completed before it even started (in print-only mode)
+- PTRobot4100: fixed bug where it would not work properly when a disc was left in the printer at the start of a print-only job
+- PTRobotDP & PTRobotDPPRO - fixed so they update dwSystemStatusHW in PTRobot_GetStatus2() call.
+
+
+11/22/2010 - Version 1.5.3
+--------------------------
+Versions:  PTRobot.dll 1.5.3.0,  PTRobotDP.dll 1.5.3.0, PTRobotDPPRO.dll 1.5.3.0, PTRobotDPse.dll 1.5.3.0, PTRobot4100.dll 1.5.3.0 PTRobotApp.exe 1.2.1.0, PTRobotStr 1.1.2.0  MPTRobot.dll 1.0.7.0
+- PTRobot, PTRobot4100, MPTRobot: Added dwKioskPrintOnly value in PTPrinterSettings2 structure.  Allows user to set print-only to do kiosk mode for Bravo 4100.
+
+
+11/22/2010 - Version 1.5.2
+--------------------------
+Versions:  PTRobot.dll 1.5.2.0,  PTRobotDP.dll 1.5.2.0, PTRobotDPPRO.dll 1.5.2.0, PTRobotDPse.dll 1.5.2.0, PTRobot4100.dll 1.5.2.0 PTRobotApp.exe 1.2.1.0, PTRobotStr 1.1.2.0  MPTRobot.dll 1.0.6.0
+- PTRobot: PTRobotStatus2 changed so that xxxInkRemaining values are long instead of DWORD - allows ink % to go negative
+- PTRobot4100: Added PTACT_FAN_ON, PTACT_FAN_OFF
+- PTRobot4100: removes disc left in printer (if any) when PTACT_AUTOPRINTER_MODE called
+- PTRobot4100: multi-page printing now works with printer driver 1.0.2.
+- MPTRobot: Added SetPrintCopies call and new System actions
+- debug file rolls over at 8MB instead of 1MB
+ 
+
+11/16/2010 - Version 1.5.1
+--------------------------
+Versions:  PTRobot.dll 1.5.1.0,  PTRobotDP.dll 1.5.1.0, PTRobotDPPRO.dll 1.5.1.0, PTRobotDPse.dll 1.5.1.0, PTRobot4100.dll 1.5.1.0 PTRobotApp.exe 1.2.1.0, PTRobotStr 1.1.2.0  MPTRobot.dll 1.0.5.0
+- PTRobot: Added PTRobot_SetPrintCopies() API.  This is for a fast "AutoPrinter" function with the DP4100.  
+- PTRobot: Writing printing start/finish time in PrinterName.ini file in PTI/Drivers/DriverName folder
+- PTRobot4100: Added more error handling
+- PTRobot4100: Added PTACT_AUTOPRINTER_MODE System action that is used in conjuction with PTRobot_SetPrintCopies() for a faster autoprinter mode
+
+
+11/5/2010 - version 1.5.0
+--------------------------
+Versions:  PTRobot.dll 1.5.0.0,  PTRobotDP.dll 1.5.0.0, PTRobotDPPRO.dll 1.5.0.0, PTRobotDPse.dll 1.5.0.0, PTRobot4100.dll 1.5.0.0 PTRobotApp.exe 1.2.1.0, PTRobotStr 1.1.2.0  MPTRobot.dll 1.0.5.0
+- MPTRobot.dll: Fixed bug in where the PrinterSettings2 was incorrect which caused SetPrinterSettings2() to crash
+- MPTRobot.dll: Added DiscPublisher4100 enum value to RobotType
+- All: Fixed issues with Robot_GetPrinterSettings2() and Robot_SetPrinterSettings()
+- 4100 & Xi: Fixed issue where LED would flash for ink low when it wasn't really low
+- 4100: don't report back lid "has been opened flag" until lid is actually closed again
+- Added Bravo4100.dll to support new Disc Publisher 4100 Series
+- Added PTRobot_GetPrinterSettings2() and PTRobot_SetPrinterSettings2() API calls for more control over print settings.  See PTRobot.h for details.
+- Writing ink % used in last print into [LastPrint] section of Printer Name.ini file.  The value is x10000 (e.g. 1.9738% = 19738)
+  Also writing last print file name into same .ini file (in \PTI\Drivers\...\ folder)
+- MPTRobot.dll: Added 'AddMergeFields’, 'PrintFileWithMerge2', 'PrintFileWithMergeFile', 'SetApplicationID'  and also signed the DLL for "strong name" per StorageQuest
+- All Robots: PTRobot_SetPrinterSettings() updated - changed permissions & added more logging (sometimes was failing to set Devmode in SetPrinterPrivateDevmode() )
+- Bravo4100: LED flashing working now (including errors and ink low)
+- Bravo4100: Updated error handling
+
+Version 1.4.8 & Version 1.4.9 - not released
+
+Version 1.4.7
+------------------------
+- Fixed two issues with SureThing Merge files
+   * Now uses correct delimiter between FIELD1, FIELD2,... when the merge file is not found and 'Use first record as field names" is enabled
+     (ie. German windows uses ; instead of , )
+   * Now works properly for Unicode merge file when 'use first record as field names' is enabled for the .std file
+
+
+Version 1.4.6
+------------------------
+- Updated PTRobot_PrintFileWithMerge() and PTRobotPrintFileWithMerge2() to work properly if a Merge file was associated with the
+.std file but the merge file was not at the original location (in this case it will create the merge file in the same folder as 
+the .std file).  This was not working correctly previously.
+
+
+Version 1.4.5 
+------------------------
+- Updated PTRobot_SetRoboticDrive() to program the flash if drive not in Registry even if 1-drive (before it would only do for 2-drive)
+This allows PTRobot-based apps to work with eSATA units.
+- Fixed bug in PTRobot_PrintFileWithMerge2() where the merge file was not being obtained properly.
+- Got rid of frequent debug for the SE where it reported the cartridge type installed continuously
+
+Version 1.4.4
+-------------------------
+-  Fixed SE large cartridge bug
+
+Version 1.4.3
+-------------------------
+-  Fixed unicode issue with GetDriveSerial
+
+
+Version 1.4.2
+-------------------------
+- Fixed bug where discs placed in drive over and over on 100 disc job.  Two SendQueue Threads running simultaneously
+
+Version 1.4.1
+-------------------------
+- Fixed win 7 drive issue with GetDeviceProperty
+
+Version 1.4.0
+-------------------------
+PTRobotDP
+- Fixed issues with getting status multiple times
+
+PTRobotSE
+- Fixed various robotic error handling issues
+- Fixed issues with getting status multiple times
+
+-Fixed issue in SE and PROXi where if a disc was not placed into the printer then you could get in a situation where that error was not handled by the software and the print would be sent.
+
+
+Version 1.3.9
+-------------------------
+- Updated for DPXi
+- Fixed bug where Robot_LoadDriveToPrinter was not checking dwRet val and it caused a double disc error.
+- Added an event to trigger after the cancel event is handled.
+- Fixed a bug in GetUSBInfo that would cause a crash if the PNPData Reg key is not preset
+
+8/10/2009 - Version 1.3.8
+-------------------------
+Versions:  PTRobot.dll 1.3.8,  PTRobotDP.dll 1.3.8, PTRobotDPPRO.dll 1.3.8, PTRobotDPse.dll 1.3.8, PTRobotApp.exe 1.2.1, PTRobotStr 1.1.1
+* Fixed bug where PTRobot_GetPrinterSettings() and PTRobot_SetPrinterSettings() did not work
+  correctly on 64-bit OS.
+  
+
+12/17/2008 - Version 1.3.7.3
+----------------------------------------
+Versions:  PTRobot.dll 1.3.7.3,  PTRobotDP.dll 1.3.7, PTRobotDPPRO.dll 1.3.7, PTRobotDPse.dll 1.3.7, PTRobotApp.exe 1.2.1, PTRobotStr 1.1.1
+* returns PTROBOT_MULTDRIVES if the robotic drive is not found in a 1-drive unit (before it was returning PTROBOT_INVALID_DRIVE)
+This allows user to choose the drive as a last resort.
+
+10/7/2008 - Version 1.3.7.1
+--------------------------------------
+* Versions:  PTRobot.dll 1.3.7.1,  PTRobotDP.dll 1.3.7, PTRobotDPPRO.dll 1.3.7, PTRobotDPse.dll 1.3.7, PTRobotApp.exe 1.2.1, PTRobotStr 1.1.1
+* Fixed issue where the bridge board serial number was being limited to 20 characters (should not be a problem because serial numbers are 
+   supposed to be < 20 characters but at least one unit in the field had a serial number > 20 characters).
+
+
+9/8/2008 - Version 1.3.7
+------------------------
+* Versions:  PTRobot.dll 1.3.7,  PTRobotDP.dll 1.3.7, PTRobotDPPRO.dll 1.3.7, PTRobotDPse.dll 1.3.7, PTRobotApp.exe 1.2.1, PTRobotStr 1.1.1
+* Fixed bug where it would give a false SYSERR_NO_DISC_IN_PRINTER (53) if the robot failed to pick a disc from the recorder 
+or on a print-only kiosk situation where the one bin became empty.
+* Fixed issue where the drive would not be "found"  by PTRobot if the Friendly Name did not get registered by Windows when discovered
+* Fixed bug where Trace file was not honored if the log level was set in the registry
+
+8/21/2008 - Version 1.3.6
+------------------------
+* Versions:  PTRobot.dll 1.3.6,  PTRobotDP.dll 1.3.6, PTRobotDPPRO.dll 1.3.6, PTRobotDPse.dll 1.3.6, PTRobotApp.exe 1.2.1, PTRobotStr 1.1.1
+* Fixed bug where PTRobot_LoadDrive, PTRobot_LoadPrinter, PTRobot_LoadPrinterFromDrive, PTRobot_UnLoadDrive,
+	PTRobot_UnLoadPrinter, PTRobot_MoveDiscBetweenLocations, could return Error 528 if:
+	a) PTRobot_GetRobotStatus2 was called AND
+	b) the cartridge was in an alignment "recommended" condition (ie. same cartridge re-installed)
+* Slight speed increase in waiting for command to finish (tighter poll loop)
+* DPPRO:  Changed to pick up disc 3 seconds sooner after disc ejected (speed improvement)
+
+5/1/2008 - Version 1.3.5
+------------------------
+* Versions:  PTRobot.dll 1.3.5,  PTRobotDP.dll 1.3.5, PTRobotDPPRO.dll 1.3.5, PTRobotDPse.dll 1.3.5, PTRobotApp.exe 1.2.1, PTRobotStr 1.1.1
+* Fixed PTRobot_AddMergeFields problem where on some machines (e.g. German Windows) where the default delimiter was a ';' instead of a ','.  
+This would not allow merge fields in SureThing to work properly -- they would all get put into one field.  
+Now PTRobot gets the system delimiter from Windows and uses that when creating the merge file
+(in PTRobot_PrintFileWithMerge2() ).  This change affects PTBurn 3.0 SDK which uses this for SureThing merges.
+* Changed so that bridge boards with lower-case letters in their serial numbers work properly (before PTRobot would fail to match the drive if the bridge board had a lower-case letter in the serial number).
+* Added system action to allow the robot to operate with cartridges.  Of course this is only if doing robotics without printing.  For example, PTRip can be used without cartridges in the robot.
+
+1/24/2008 - Version 1.3.4
+-------------------------
+* Versions:  PTRobot.dll 1.3.4,  PTRobotDP.dll 1.3.4, PTRobotDPPRO.dll 1.3.4, PTRobotDPse.dll 1.3.4, PTRobotApp.exe 1.2.0, PTRobotStr 1.1.1
+* Added Polish language strings, Traditional Chinese strings, and added some missing strings in other languages
+* PTRobot_GetRobotStatus() was changed to always return ink level information - even if busy
+  (if busy, then the ink information will be from the previous inquiry).
+* Made a change to return PTROBOT_MULTDRIVES from PTRobot_EnumDrives IF
+--> a single drive robot finds one USB drive but there is no serial # for the drive.
+(this fixes problem on some Plextor 230A Bravo II units so user can at least choose the drive manually).
+
+1/9/2008 - Version 1.3.3
+------------------------
+* Versions:  PTRobot.dll 1.3.3,  PTRobotDP.dll 1.3.3, PTRobotDPPRO.dll 1.3.3, PTRobotDPse.dll 1.3.3, PTRobotApp.exe 1.1.9, PTRobotStr 1.1.0
+* Fixed so PTRobot will print raster images (e.g. JPG) even when running in a Windows Service in Vista (ie. PTBurn 3)
+Before PTBurn3 SDK was not printing in Vista. (Changed how we get DC to printer in PrintRasterImage()).  
+--> SureThing files still do not print.
+* Changed so that BravoSE & BravoII can be used in VMWare. It won't automatically find the robotic drive, but now you can select it.
+* Added Chinese & Korean strings to PTRobotStr.dll.  Had to change the offsets entirely to make them fit.
+--> So, PTRobot 1.3.3 or higher MUST be used in conjuction with PTRobotStr.dll 1.1.0 or higher.
+* Changed some functions to only log when log level is >=5 (to avoid too much info in log)
+  PTRobot_GetRobotInfo(), PTRobot_GetRobotInfo2(), PTRobot_GetRobotStatus(), PTRobot_GetRobotStatus2(),
+  PTRobot_GetRobotOptions().
+    
+
+12/6/07 - Version 1.3.2
+-----------------------
+* Versions:  PTRobot.dll 1.3.2,  PTRobotDP.dll 1.3.2, PTRobotDPPRO.dll 1.3.2, PTRobotDPse.dll 1.3.2, PTRobotApp.exe 1.1.8(nc), PTRobotStr 1.0.9(nc)
+* Updated for production to allow the drives to be programmed into Flash (Page 3)
+  even BEFORE Page 2 has been programmed at final checkout.
+
+
+11/28/07 - Version 1.3.1
+------------------------
+* Versions:  PTRobot.dll 1.3.1,  PTRobotDP.dll 1.3.1, PTRobotDPPRO.dll 1.3.1, PTRobotDPse.dll 1.3.1, PTRobotApp.exe 1.1.8, PTRobotStr 1.0.9(nc)
+* Fixed to work with SureThing 5.0.588.  Version 5.0.588 of SureThing changed its COM
+interface so that earlier versions of PTRobot would crash when trying to print.  
+Version 1.3.1 works with SureThing 5.0.588 and also earlier versions.
+* Fixed PTRobot_GetSureThingPreview() so that it works properly when the SureThing
+file has a Merge file associated with it.  For a proper preview of a .STD with merge
+you also need to have SureThing 5.0.588 installed.
+
+
+11/15/07 - Version 1.3.0
+------------------------
+* Versions:  PTRobot.dll 1.3.0,  PTRobotDP.dll 1.3.0, PTRobotDPPRO.dll 1.3.0, PTRobotDPse.dll 1.3.0, PTRobotApp.exe 1.1.8, PTRobotStr 1.0.9(nc)
+* Now have both Unicode and Multi-byte (MBCS) versions.  Unicode is new.  Unicode gives support for 2-byte languages 
+  (e.g. printing files with names/paths that contain 2-byte characters).  Unicode version also logs in Unicode.
+  For Unicode version, the calling application should be written as a Unicode app.
+* PTRobot_PrintFile(), PTRobot_PrintFileWithMerge(), PTRobot_PrintFileWithMerge2() updated to
+  make sure the print index = 1 (or greater) because Microvision informed us that the merge records 
+  are 1-based and not 0-based.  Using 0 for a merge record will cause Surething to print ALL 
+  of the records in the merge database file.
+* Added functionality in PTRobotApp.exe to use either PTRobot_PrintFileWithMerge() or PTRobot_PrintFileWithMerge2()
+
+
+10/26/07 - Version 1.2.8
+------------------------
+* Versions:  PTRobot.dll 1.2.8,  PTRobotDP.dll 1.2.8, PTRobotDPPRO.dll 1.2.8, PTRobotDPse.dll 1.2.8, PTRobotApp.exe 1.1.7, PTRobotStr 1.0.9(nc)
+* Fixed bug in PTRobot_GetSureThingPreview() where wrong value (529) would be returned.
+* Added several System Actions:  PTACT_CALIBRATE_ONE_DISC, PTACT_CHANGE_CARTRIDGE,   PTACT_END_CARTRIDGE_CHANGE, 
+  PTACT_SHIP_POSITION, PTACT_RESET_LEFT_INK_LEVELS, PTACT_RESET_RIGHT_INK_LEVELS
+* Added API PTRobot_ClearMergeList() to clear the merge field list created.  
+  This is used after doing PTRobot_AddMergeField()...then PTRobot_GetSureThingPreview().  
+  Actually, it looks like SureThing 5.0.577 is not honoring merge files when creating previews -- 
+  -- hopefully this can get fixed in a future version of SureThing.
+* Fixed bug for Bravo II/XR Pro/XRP  where it would not recover properly if the disc "shot out" of the
+printer as the tray was retracted.  Now it ejects the printer tray and goes into an error - waiting for
+user to put the disc in the printer and shut the cover.
+* PTRobot_GetRobotStatus2() will now report back 0 discs in the bin if the robot goes into an input empty
+condition.  Before, it would report back the number of discs in the bin BEFORE the error occurred.
+NOTE: Currently, the firmware is not updating the value correctly so PTRobot is overriding this value
+as long as the input empty condition is in place (if the error is cleared using PTRobot_KillSystemError() 
+then the value will revert to what the firmware is reporting).
+* Converted to VS 2005
+* PTRobotApp now creates a preview "C:\\PTRobotPreview.jpg" everytime a STD is selected.
+  Currently, it does not display this preview, but it is created (using PTRobot_GetSureThingPreview() ).
+* PTRobotDP & DPPRO - improved error recovery for "no disc in printer error". 
+* SATA drives: now correctly gets drive serial number (no bridge board involved).
+* Fixed PTRobot_GetMediaInfo() to return BD-R information.
+
+
+7/27/07 - Version 1.2.7
+-----------------------
+* Versions:  PTRobot.dll 1.2.7,  PTRobotDP.dll 1.2.7, PTRobotDPPRO.dll 1.2.7, PTRobotDPse.dll 1.2.7, PTRobotApp.exe 1.1.6, PTRobotStr 1.0.9(nc)
+* Added two API calls:
+	PTRobot_GetManufactureInfo()	--> retrieves manufacture info about the printer (Bravo SE/Pro/XRP support this)
+	PTRobot_GetSureThingPreview() --> Gets/Creates a preview image of a specified SureThing file
+* new Structure PTManufactureInfo is returned by PTRobot_GetManufactureInfo() call.  See PTRobot.h for details.
+* Fixed bug where debugging was not being turned off even if debug level was set to 0.  Now, no debugging is
+written if the debug level is set to 0.
+
+7/11/07 - Version 1.2.6
+------------------------
+* Versions:  PTRobot.dll 1.2.6,  PTRobotDP.dll 1.2.6, PTRobotDPPRO.dll 1.2.6, PTRobotDPse.dll 1.2.6, PTRobotApp.exe 1.1.5(nc), PTRobotStr 1.0.9(nc)
+* fixed so Bitmap/JPG images print with correct "amount of image data"
+  (before it was squishing the image into the printable area - basically this would print too much information).
+* Made the Bravo II/XR return 0% fill when no/invalid cartridges are installed(Robot_GetSystemStatus).
+* Fixed the issue where if a new error occurs while another error is being reported then the new error is reported.  This was
+  causing a cover open error to mask cartridge low errors (Robot_GetSystemStatus).
+* Fixed the case where after a multiple disc picked error in the printer, the tray was not pulled in and then you would get a no disc
+  in printer error  -- Bravo II/XR/Pro
+
+4/9/07 - Version 1.2.5
+-----------------------
+* Versions:  PTRobot.dll 1.2.5,  PTRobotDP.dll 1.2.5, PTRobotDPPRO.dll 1.2.5, PTRobotDPse.dll 1.2.5, PTRobotApp.exe 1.1.5, PTRobotStr 1.0.9(nc)
+* (PTRobotApp) after a system action display a dialog showing completion when the robot has completed the action
+* (SE Updated to allow BravoPro cartridges (per Mark's request)
+* (SE) changed to work if the driver name is "D20 Disc Publisher" or "Disc Publisher SE"
+* (SE) Don't take the time to get info from Flash (was wasting a few seconds on power up)
+* (Pro) Only get info from flash IF the top/bottom drives cannot be resolved from Registry
+* (SE/Pro) Changed so that data from Flash is only accepted with a Page=13 (instead of 3).
+This is because the BravoPro drive positions are/were being incorrectly programmed by the production tool
+* (Pro) if the top/bottom drives are not resolved, only populate drive list with drives that are on the
+printer hub (this avoids having an IDE drive on the list of drives when selecting top/bottom drive).
+* Changed #define ROBOT_DISCPUBLISHER_XYZ --> ROBOT_DISCPUBLISHER_SE
+* (Pro) Updated drive enumeration to allow SATA drives to be used
+* Bug fix: could hang when re-init drives system action was called
+* (SE/Pro) Bug fix:  PTACT_CHECKDISCS system action - status was not BUSY during the entire operation
+* (SE) Bug fix:  pick retry from recorder was messed up - now it retries once properly 
+* (Pro/II) Bug fix:  on input empty with kiosk mode, it was not attempting to pick from both bins on a retry
+  -- Bravo II/XR was updated on 4/9/07 with this last fix.
+
+12/12/06 - Version 1.2.4
+---------------------------
+* Versions:  PTRobot.dll 1.2.4,  PTRobotDP.dll 1.2.4, PTRobotDPPRO.dll 1.2.4, PTRobotDPse.dll 1.2.4, PTRobotApp.exe 1.1.4(nc), PTRobotStr 1.0.9(nc)
+* Change for VISTA (Pro & SE):  Look to get and set INI values in the \All Users\Application Data\PTI\Drivers\*driver_name*\ folder
+If the INI file is not found then it falls back to using INI from printer driver folder (ie. 3 folder)
+* (ALL) Fixed bug where Robot_WaitForPrinting() would never break out of wait loop. This would happen when sending a print
+to the printer without loading the printer first (ie. firmware would load/unload the printer).
+The bug would cause grief in PTPublisher after doing Clean print.
+* (SE) - attempt retry pick when dropped disc from recorder (we found usually dropped disc from recorder would fall into the recorder)
+* (SE) - Fixed bug where it would incorrectly give Multiple discs in printer error (after dropped disc error).
+* (SE) - keep printer tray out whenever possible to avoid warping due to drive heat
+
+8/12/06 - Version 1.2.3
+------------------------
+* Versions:  PTRobot.dll 1.2.3,  PTRobotDP.dll 1.2.3, PTRobotDPPRO.dll 1.2.3, PTRobotDPse.dll 1.2.3, PTRobotApp.exe 1.1.4, PTRobotStr 1.0.9 
+* Made so doesn't crash if user doesn't call PTRobot_SetupDebugging() before calling PTRobot_Init()
+* PTRobot_GetRobotStatus() now returns BUSY during entire alignment procedure.
+* Improved AlignPrintThread() to report errors before starting
+* Logging changes:
+	- Separated the LogMessage() function so PTRobot.dll sends to the Trace file, and the individual robot DLLs send to debug file
+
+
+8/3/06 - Version 1.2.2
+------------------------
+* Versions:  PTRobot.dll 1.2.2,  PTRobotDP.dll 1.2.2, PTRobotDPPRO.dll 1.2.2, PTRobotDPse.dll 1.2.2, PTRobotApp.exe 1.1.4, PTRobotStr 1.0.9 
+* PTRobotStr --
+	* Added separate strings for Bravo SE
+* For BravoSE we don't allow PTACT_CHECKDISCS while the cover is open.
+* PTRobot_LoadDrive, PTRobot_LoadPrinter, PTRobot_LoadPrinterFromDrive, PTRobot_UnLoadDrive, PTRobot_UnLoadPrinter,
+PTRobot_MoveDiscBetweenLocations now return PTROBOT_BUSY if an alignment is needed.
+* PTACT_ALIGNPRINTER system action is now in separate thread so it now should report input empty or mispick condition.
+* Added SYSERR_NO_DISC_IN_PRINTER & SYSERR_BUSY as possible system errors
+* Added dwMaxDiscsPerBin into PTRobotInfo2 structure
+* Added dwCartridgeInstalled[], dwCartridgeNeedsAlign[], and dwSystemStateHW to PTRobotStatus2 structure
+* Fixed documentation in PTRobot.h to specify locations:  100=Printer and 200=Reject
+
+
+6/23/06 - Version 1.2.1
+-----------------------
+* Versions:  PTRobot.dll 1.2.1,  PTRobotDP.dll 1.2.1, PTRobotDPPRO.dll 1.2.1, PTRobotDPse.dll 1.2.1, PTRobotApp.exe 1.1.3, PTRobotStr 1.0.6 (nc)
+* Fixed case where FriendlyName is not found in the Registry -- now it just copies over pseudoname and continues
+(previously PTRobot would lock into endless loop).
+* fixed intermittent bug in PTRobot_GetMediaInfo() where it would look like a DVD-ROM was inserted in the drive
+  even though a CDR was really inserted.
+* Added PTACT_CLEANCARTRIDGES capability to PTRobot_SystemAction
+* Added PTACT_CHECKDISCS capability to PTRobot_SystemAction
+* Fixed bug where matching the USB hub to the robot could fail if multiple units have been installed.
+This could cause PTRobot_EnumDrives() to return (503).
+* Added support for newer SureThing COM interface (should be transparent to user of PTRobot).
+* Fixed bugs in PTRobotDP.dll, PTRobotDPPRO.dll
+	- discs in bin were not being reported
+	- mispick from printer was not being reported
+	- fixed condition where printer could report Busy condition after error condition (introduced in 1.2.0)
+
+
+5/15/06 - Version 1.2.0
+------------------------
+* Versions:  PTRobot.dll 1.2.0,  PTRobotDP.dll 1.2.0, PTRobotDPPRO.dll 1.2.0, PTRobotDPJR.dll 1.1.0, PTRobotApp.exe 1.1.2, PTRobotStr 1.0.6 (nc)
+* Added JPG and BMP printing capability
+* When changing the print settings via PTRobot_SetPrinterSettings, the system default print settings will restored after a print
+is sent via PTRobot_PrintFile() or PTRobot_PrintFileWithMerge().
+* Fixed bug where OuterMargin printer setting was not being obtained nor set properly 
+(in PTRobot_SetPrinterSettings() and PTRobot_GetPrinterSettings).
+* Updated PTRobotApp for Disc Publisher XRP (drive selection)
+* Changed PTRobotStatus2 to have an array for number of discs in bin (dwNumDiscsInBins) for future products
+* Added Disc Publisher XRP support to PTRobot.dll and PTRobotDPPRO.dll
+* PTRobot_GetRobotStatus() now returns SYSSTATE_BUSY state after an error condition when the unit becomes busy.  
+Before it would remain SYSSTATE_ERROR state until IDLE.  
+* PTRobot.h - Added PTRobotStatus2 structure & PTRobot_GetStatus2() API call
+				Added return value PTROBOT_BUSY for this call
+		Added PTRobotInfo2 structure & PTRobot_GetRobotInfo2() API call	
+		Added robot type:  #define ROBOT_DISCPUBLISHER_XRP		5
+* PTRobotDP, PTRobotDPPRO - Implementing new PTRobot_GetStatus2() and PTRobot_GetRobotInfo2() API
+  --> This passes more Status and more system Info back including # of discs in bin and number & locations of cartridges.
+
+
+3/7/05 - Version 1.1.4
+-------------------------
+* Versions: PTRobot.dll 1.1.3, PTRobotDP.dll 1.1.3 (nc), PTRobotApp.dll 1.1.1, PTRobotDPPRO.dll 1.0.6(nc), PTRobotStr 1.0.6 (nc)
+* Added support for new robot.
+
+10/13/05
+-------------------------
+* Changed the SetApplicationID to send 0 instead of 1000.  Small change that didn't require us to 
+  update the version of the entire solution.
+
+
+
+
+
+
+10/13/05
+-------------------------
+* Changed the SetApplicationID to send 0.  Only the sample application version changed.
+
+
+9/30/2005 - Version 1.1.3
+-------------------------
+* Versions: PTRobot.dll 1.1.2, PTRobotDP.dll 1.1.3, PTRobotApp.dll 1.0.8 (nc), PTRobotDPPRO.dll 1.0.6(nc), PTRobotStr 1.0.6 (nc)
+* Updated for use with Bravo XR and OptiVault
+* Logs the disc MID code when PTRobot_GetMediaInfo is called
+
+
+9/8/2005 - Version 1.1.2
+------------------------
+* Versions: PTRobot.dll 1.1.1, PTRobotDP.dll 1.1.2, PTRobotApp.dll 1.0.8, PTRobotDPPRO.dll 1.0.6, PTRobotStr 1.0.6
+* Added support for Disc Publisher XR
+* Added more error string translations
+* Updated for better Bravo Pro support
+* Added new system error SYSERR_WAITING_FOR_PRINTER when a print timeouts (used to report SYSERR_INTERNAL). 
+* Changed friendly name of drive to say "on Usb x.x" instead of "USB Device" (tszDriveName in PTDriveInfo structure).
+
+
+8/2/2005 - Version 1.0.8.0
+---------
+* Versions: PTRobot.dll 1.0.8, PTRobotDP.dll 1.0.8, PTRobotApp.dll 1.0.7, PTRobotDPPRO.dll 1.0.5, PTRobotStr 1.0.3
+* Added other language translations - PTRobotStr ver 1.0.3
+* Updated App to handle up to 512 character messages from PTRobot_GetErrorString.  Current max string is German at about 305 wchars.
+* Fixed small resource memory leaks on DP and DPPRO.
+* fixed to get DVD+R DL media information (had to add 14 book type)
+* fixed bug where system state is set to idle but error can remain after the error is killed.
+* Fixed bug in ink low - if spits was > full spits then the ink low would not be reported.
+* Added DLL Version Logging
+* Fixed a bug where PTROBOT_PRINTFILE_NOT_FOUND is being returned in place of PTROBOT_PRINTAPP_OPEN.
+* Updated error messages
+* Added new system errors SYSERR_DROPPED_DISC_PRINTER_FATAL, SYSERR_MULTIPLEDISCS_IN_RIGHTBIN, SYSERR_MULTIPLEDISCS_IN_LEFTBIN	
+* Fixed a bug in PTRobot_GetErrorString where the robot type offset was being added to the error value for API errors.
+
+
+7/13/2005 - Version 1.0.7.0
+----------
+* Versions: PTRobot.dll 1.0.7, PTRobotDP.dll 1.0.7, PTRobotApp.dll 1.0.6, PTRobotDPPRO.dll 1.0.4, PTRobotStr 1.0.1
+* Added ink level info to PTRobotStatus. 
+* Added RobotHandle as an input param to GetErrorString.  If the handle is not null then we check the robot type
+  to determine if we need to return a different string, otherwise we ignore the robot type.
+
+7/12/2005 - Version 1.0.6.0
+----------
+* Found an issue that could cause an app crash if the app tried to pass a null string into the PTRobot_SetupDebugging 
+  function.
+* In PTRobot_Initialize we keep track of how many DLLs failed to load and if all DLLs fail to load we then issue the
+  PTROBOT_MISSING_DLL error.
+* Changed how we determine if surething is running. Previously we checked for a window and now we look at the active
+  processes to see if "stcd.exe" is one of them.
+* Now when PTRobot_KillSystemError is called we call the new Cancel Command before we kill the error to 
+  get out of the thread sending commands.
+
+
+6/23/2005 - Version 1.0.5.0
+----------
+* Fixed a problem with the drive enumeration changes that were implemented in 1.0.4.
+* Added some error strings for PTRobot return values.
+* Updated the sample app to check return values of PTRobot API functions.
+* Fixed an issue with the robot firmware not being null terminated.
+* Fixed an issue with garbage characters being present after the null on certain strings.
+* PTRobot_GetMediaInfo was not formatting the media string on CDRs correctly.
+* PTRobot_OpenCloseDrive was returning the wrong return value.
+
+6/21/2005 - Version 1.0.4.0
+----------
+* Implement PTRobot_GetMediaID.  Previously it would just simulate the media discovery behavior.
+* Implemented PTRobot_GetErrorString
+	- Added PTRobotStr DLL.
+	- I have implemented some English strings. We need to implement the rest of the english strings
+	  as well as the other languages.
+* Attempted to fix the issue in EnumDrives when the drives don't enumerate correctly (the registry is
+  not as we would expect it.)
+* Fixed a bug that would cause the wrong error to be returned when status was requested before: 
+	- any move operation occurred AND
+	- the unit was in an error condition.
+
+
+6/15/2005 - Version 1.0.3.0
+----------
+* Now support the "use first record for field names" for surething merge files.
+* Fixed a bug with some .std file formats that caused an invalid file error when attempting
+  to print a file.
+
+6/14/2005 - Version 1.0.2.0
+---------
+* Added logging within the drive enumeration functions to diagnose enumeration failure.
+* Added PTRobot_GetMediaInfo
+* Added PTRobot_SetApplicationID
+* Added PTRobot_GetErrorString
+* Removed dwCommandComplete from the System Status structure.
+* Fixed a bug in load printer.  When loading the recorder from the printer the printer tray isn't shut.
+
+6/3/2005 - version 1.0.1.0
+--------
+* Modified PTRobot.dll so it will load the other two DLLs (it would fails if not in same directory as .exe and 
+dynamic linking is used).
+* Now loading the other two DLLs in PTRobot_Initialize instead of PTRobot_EnumRobots.  
+* Fixed the EnumDrive and EnumRobot behavior.  Now when you enum the robots both the robot and drive lists are deleted and
+  the robots and drives are enumerated.  However when you just enumerate the drives only the drives from the robot passed in
+  are deleted prior to the enumeration.
+* Added an Enum Drives button to the sample app to test multiple drive enumeration.
+* Added PTROBOT_MISSING_DLL return value to PTRobot_Initialize() - must update API document
+* Fixed forgotten extern "C" for PTRobot_SetupDebugging()
+* Fixed bug where PTRobot_EnumDrives would not return correct number of drives for Bravo II and would not return
+correct handles for BravoPRO.
+* Changed dwOptions and dwAction to dwSupportedOptions and dwSupportedActions respectively in PTRobotInfo (for clarity)
+* Init robot arrays and drive arrays to zero now
+* Updated notes in PTRobot_EnumRobots to clarify that the drive array is not valid until PTRobot_EnumDrives is called.
+* Fixed a bug in PTRobot_GetRobotStatus where if we cannot find the robot we returned PTROBOT_INVALID_DRIVE instead of
+  PTROBOT_INVALID_ROBOT.
+* BUG FIX - was problem when you clicked the get printer settings button before the set printer settings button in the app.
+
+
+5/20/2005 - version 1.0.0.1
+---------
+Beta release.

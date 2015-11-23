@@ -1,0 +1,5 @@
+C:\Projects\PTRobotDLLSolution\mptrobot\PTRobot\PTRobot\bin\Release\MPTRobot.dll
+C:\Projects\PTRobotDLLSolution\mptrobot\PTRobot\PTRobot\bin\Release\MPTRobot.pdb
+C:\Projects\PTRobotDLLSolution\mptrobot\PTRobot\PTRobot\obj\Release\ResolveAssemblyReference.cache
+C:\Projects\PTRobotDLLSolution\mptrobot\PTRobot\PTRobot\obj\Release\MPTRobot.dll
+C:\Projects\PTRobotDLLSolution\mptrobot\PTRobot\PTRobot\obj\Release\MPTRobot.pdb

@@ -1,0 +1,9 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>
+    <RemoteDebugEnabled>true</RemoteDebugEnabled>
+    <StartAction>Program</StartAction>
+    <RemoteDebugMachine>VMDebug@kevinl-vm-xp</RemoteDebugMachine>
+    <StartProgram>C:\Program Files\Primera Technology\PTPublisher\PTPublisher.exe</StartProgram>
+  </PropertyGroup>
+</Project>
